@@ -335,15 +335,178 @@ forEach(data, writeToFile);
 filter, map, reduce
 
 
+filter ==> subset
+map ==> transform the data
+reduce ==> aggregate [ sum, count, max, avg, ..] ==> Input is collection; ouput is single value [ number]
+
+========================
+
+* HOF: function return a function
+
+
+pure function:
+
+function greeting(msg, name) {
+	return msg + " " + name;
+}
+
+console.log(greeting("Good morning", "Smith"));
+console.log(greeting("Good morning", "Smitha"));
+console.log(greeting("Good morning", "rita"));
+
+--------
+// closure
+
+function greeting(msg) {
+	return function (name) {
+		return msg + " " + name;		
+	}
+}
+
+var mg = greeting("Good morning");
+
+console.log(mg("Rita"));
+console.log(mg("Ria"));
+console.log(mg("Priya"));
+
+
+var gg = greeting("Hi");
+console.log(gg("Ria"));
+
+=========
+
+Cache
+
+getEmployee(3); ==> Make RESTful call to server ==> dB ==> convert to JSON ==> return json
+
+getEmployee(5); ==> Make RESTful call to server ==> dB ==> convert to JSON ==> return json
+
+getEmployee(3); ==> Avoid making API call; get from cache
+
+========================================
+
+JavaScript Module using IIFE signature ()();
+
+var productModule = (function() {
+	var total = 100;
+	function task() {
+		console.log(total)
+	}
+	function print() {
+		task();
+		console.log("....");
+	}
+	return {
+		"print": print
+	}
+})();
 
 
 
+var customerModule = (function() {
+	var total = 999;
+	function sample() {
+		console.log(total)
+	}
+	function print() {
+		sample();
+		console.log("....");
+	}
+	return {
+		"print": print
+	}
+})();
 
 
 
+===============
+
+ES 2016 / ES 6 version
+
+ECMAScript ==> JavaScript version
+
+ES 5 => almost most of the JS engines support 
+
+https://caniuse.com/
+
+TransCompiler / Transpiler to convert ES6+ to downward compatiblity
+
+* Babel is a free and open-source JavaScript transcompiler that is mainly used to convert ECMAScript 2015+ code into a backwards compatible version of JavaScript that can be run by older JavaScript engines
+
+* Tracuer
+
+-------
+
+Features of ES2015 / ES6
+
+1) Scope members
+1.1) let
+1.2) const
+
+
+var g = 100;
+const PI = 3.14159;
+
+function doTask() {
+	let a = 10; // same as "var"
+	if( g > 10 ) {
+		let b = 20; // block scope
+		c = 30;
+	}
+	console.log(g, a, b, c); // b is not visible
+}
+
+
+2) Arrow functions
+
+let add = (x,y) => {
+	//code
+	return x + y;
+}
+
+let add = (x, y) => x + y;
+
+
+===========
+
+var obj = {
+	"name": "Raj",
+	"task": function() {
+		setTimeout(() => {
+			console.log(this);
+			console.log(this.name);
+	  }, 100);
+	}
+}
+
+obj.task();
+{name: "Raj", task: ƒ}
+Raj
+
+=========
 
 
  
+var obj = {
+	"name": "Raj",
+	"task": function() {
+		setTimeout(function() {
+			console.log(this);
+			console.log(this.name);
+	  }, 100);
+	}
+}
+
+obj.task();
+
+window
+window.name
+
+==============================
+
+Arrow functions do not bind their own this, instead, they inherit the one from the parent scope, which is called "lexical scoping"
+
+
 
 
 
