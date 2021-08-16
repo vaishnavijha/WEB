@@ -509,4 +509,152 @@ Arrow functions do not bind their own this, instead, they inherit the one from t
 
 
 
+const myObject = {
+ "data": "Hello",
+  myMethod: () => {
+    console.log(this);
+  }
+};
+
+myObject.myMethod() 
+
+
+
+
+
+const myObject = {
+  "data": "Hello",
+   myMethod: function() {
+    console.log(this);
+    console.log(this.data);
+  }
+};
+
+myObject.myMethod() 
+
+
+-------------
+
+3) Destructuring array
+
+var colors = ["red", "green", "blue", "orange", "pink"];
+
+ES 5 way:
+
+var r = colors[0];
+var g = colors[1];
+
+ES6 way:
+
+var [r,g,b,...others] = colors;
+
+others will be an array od "orange" and "pink"
+
+4) Destructuring object
+
+
+var p = {"id":1,"name":"iPhone","price":124447.44,"category" : "mobile"}
+
+ES 5 way:
+console.log( p.name,  p.price);
+or
+console.log( p["name",  p["price"]);
+
+
+ES 6 way: take the members into local variable
+
+var {name, price} = p;
+console.log(name, price);
+
+or
+var {name:n, price:amount} = p;
+console.log(n, amount);
+
+ 
+5) Clone wiht spread operator
+
+var p = {"id":1,"name":"iPhone","price":124447.44,"category" : "mobile"}
+
+var ref= p; // reference
+ 
+ref.name = "Pixel 2";
+
+p.name will also be "Pixel 2"
+
+CLone:
+
+var clone = {...p}; // copy
+
+clone.name = "Vivo 4"; // p is not getting changed
+
+
+6) Template String literal [ tick ]
+
+var name = "Harry";
+
+var content = `
+			<div>
+
+				Hello ${name},
+				Welcome to React
+			</div>
+		`
+
+
+
+7) Promise API ==> Asynchronous code
+
+	returns a future [ resolved output or rejected one]
+
+	Synchronous methods:
+	function doTask() {
+		// synchronous code
+	}
+
+	let result = doTask(); // blocked call
+	// lines below are blocked
+
+	function doTask() {
+		.. has promise api
+	}
+
+	doTask()
+		.then( 
+				(res) => code, 
+				(rej) => code
+		).catch(err) { console.log(err)}
+
+	console.log("end!!"); // not blocked
+
+=============
+
+function doTask() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve("task completed !!!!");
+                }, 1000);
+            });
+        }
+
+        doTask().then(
+            (data) => console.log(data),
+            (errInfo) => console.log("Boom :-(", errInfo)
+        );
+
+       console.log("end!!!");
+
+=======================
+
+https://cdn1.server/products
+https://cdn2.server/products
+
+  function doTask() {
+            return new Promise((resolve, reject) => {
+                api call to "https://cdn1.server/products" return result if SC is 200
+                SC is 404 return reject
+            });
+        }
+
+=========
+
 
