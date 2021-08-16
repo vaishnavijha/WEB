@@ -658,3 +658,61 @@ https://cdn2.server/products
 =========
 
 
+8) async and await
+
+9) Generator functions return multiple values over a period of time
+
+function* mySaga() {
+	console.log("task 1");
+	console.log("task 2");
+	console.log("task 3");
+	
+	yield "first value";
+
+	console.log("task 4");
+	console.log("task 5");
+
+	yield 100;
+
+	console.log("task 6");
+	yield ":-)";
+}
+
+
+let ref = mySaga();
+
+ref.next();
+ref.next();
+ref.next();
+
+==============
+
+10) ES 6 module system, class ==> topic along with "webpack"
+
+===================================
+
+11) Default parameters 
+
+let add = (x = 0, y = 0, z = 0) => {
+	return x + y + z;
+}
+
+add();
+add(4);
+add(6,7);
+add(2,5,1);
+
+===========================================
+
+Bootstrap CSS Library https://getbootstrap.com/
+* container
+* row
+* col-md col-lg
+* card
+* navbar
+
+=============================
+
+
+
+
