@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var product = {
+            "name": "iPhone"
+        }
+        var person = {
+            "id": 100,
+            "name" : "Smitha",
+            "getName": function() {
+                return this.name;
+            }
+        };
+
+        console.log(person.getName());
+
+        var ref = person.getName; // Reference to a function, doesn't copy context
+
+        console.log("using ref", ref()); // get name of "window"
+
+        var bref = person.getName.bind(person); // get refence and assign context
+
+        console.log("using bind in reference", bref());
+
+        bref = person.getName.bind(product); // get refence and assign context
+
+        console.log("using bind in reference", bref());
+
+    </script>
+</body>
+</html>
