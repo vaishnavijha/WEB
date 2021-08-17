@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        Value 1 <input type="text" id="t1" /> <br />
+        Value 2 <input type="text" id="t2" /> <br />
+        Answer <input type="text" id="ans" /> <br />
+        <button type="button" id="btn">Add</button>
+    </form>
+
+    <script>
+        var btn = document.getElementById("btn");
+        var t1 = document.getElementById("t1");
+        var t2 = document.getElementById("t2");
+        var ans = document.getElementById('ans');
+        btn.addEventListener("click", (evt) => {
+            var v1 = parseFloat(t1.value);
+            var v2 = parseFloat(t2.value);
+            ans.value = v1 + v2;
+        });
+
+        btn.addEventListener("click", () => {
+            console.log("you clicked!!");
+        });
+    </script>
+</body>
+</html>

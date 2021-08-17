@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Document Object Model</h1>
+ 
+<table id="tbl" border="1">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+    </tbody>
+</table>
+
+    <script>
+         var products =
+            [
+                { "id": 1, "name": "iPhone", "price": 124447.44, "category": "mobile" },
+                { "id": 2, "name": "Onida", "price": 4444.44, "category": "tv" },
+                { "id": 3, "name": "OnePlus 6", "price": 98444.44, "category": "mobile" },
+                { "id": 4, "name": "HDMI connector", "price": 2444.00, "category": "computer" },
+                { "id": 5, "name": "Samsung", "price": 68000.00, "category": "tv" }
+            ];
+        var tbody = document.getElementById("tbody");
+
+        products.forEach(p => {
+            var row = document.createElement("tr");
+            var td = document.createElement("td");
+            var txt = document.createTextNode(p.name);
+            td.append(txt);
+            row.append(td);
+            td = document.createElement("td");
+            txt = document.createTextNode(p.price);
+            td.append(txt);
+            row.append(td);
+
+            td = document.createElement("td");
+            btn = document.createElement("button");
+            btn.setAttribute("class", "btn");
+            btn.innerText = "Delete";
+            td.append(btn);
+            row.append(td);
+            tbody.append(row);
+        });
+
+        document.querySelectorAll(".btn").forEach(button => {
+            button.addEventListener("click", () => {
+                 if(confirm("Delete " + button.parentNode.parentNode.firstChild.innerText)) {
+                    button.parentNode.parentNode.remove();
+                 }
+        });
+        })
+ 
+    </script>
+
+</body>
+</html>

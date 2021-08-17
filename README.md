@@ -713,6 +713,324 @@ Bootstrap CSS Library https://getbootstrap.com/
 
 =============================
 
+  <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  ====================================================
+
+  Day 2
+
+  IIFE ==> Immediately Invoke Function Expression
+
+Engine loads and executes:
+
+  (function() {
+  	// code
+  })();
+
+ IIFE is genrally used to define a module in JavaScript. Module is a collection of state and behaviours
+ without bringing in the concept of object
+
+CartModule ==> cart[], addToCart(), removeFromCart(), getTotal(), checkout(), doTask()
+
+ProductModule ==> products[], getProduct(), getProduct(id), addProduct(), removeProduct(), doTask()
+
+(function() {
+
+})();
 
 
+var productModule = (function() {
+	var data = "some data";
+
+	function someTask() {
+		console.log("some task ", data);
+		somePrivateTask();
+	}
+
+	function somePrivateTask() {
+		console.log("some another task ", data);
+	}
+
+	return {
+		someTask
+	}
+})();
+
+productModule.someTask(); 
+
+=====
+
+var customerModule = (function() {
+	var data = 100;
+	function print() {
+		console.log("print ", data);
+	}
+
+	function someTask() {
+		console.log("CM some task ", data);
+	}
+
+	function Customer(id, name, age) {
+		this.id = id;
+		this.name = name;
+		this.age = age;
+	}
+
+	function Address(street, city) {
+		this.street = street;
+		this.city = city
+	}
+
+	return {
+		print,
+		Customer,
+		Address
+	}
+})();
+
+customerModule.print();
+
+======================================
+Promise ==> Asynchronous == returns resolved data or rejected data [ single time return value]
+
+ES6 Generator: to return multiple values / @ different stages 
+Aggregator function ==> combination of relevant tasks to be done. 
+Transaction function ==> getbalance, credit, debit, send SMS, ...
+
+// make a call to RESTful Server
+
+function* generatorFn() {
+	yield "REQUEST_PENDING"
+	// make a call to get movie
+	yield movieData;
+
+	// make a call to get actor information
+	yield actorInfo;
+}
+
+
+var iter = generatorFn();
+
+iter.next(); // "REQUEST_PENDING"
+// i will display HourGlass image
+
+iter.next(); // movieData;
+
+
+iter.next(); // actorInfo
+
+
+============
+
+function* someGen() {
+	console.log("task 1");
+	console.log("task 2");
+	yield "first stage";
+
+	console.log("task 3");
+	yield 100;
+	console.log("task 4");
+
+	yield "Bye!!"
+}
+
+var iter = someGen();
+
+iter.next();
+iter.next();
+
+===========
+
+TypeScript ==> concept of strongly typed into JS
+
+ES6, ES 7, Dart, TypeScript, CoffeeScript used in development environment ==> transcompiler ==> ES5
+
+Babel for Es6+ to ES5
+TSC for Typescript to ES5
+
+data types of Typescript:
+
+1) Number
+
+var data:number = 100;
+
+data = "Tim"; // Error
+
+2) String
+
+var name:string = "Gopal";
+
+3) Boolean
+
+var flag:boolean = true;
+
+4) enum
+
+enum PRIORITY {
+	LOW, MED, HIGH
+}
+
+let taskPriority:PRIORITY = PRIORITY.HIGH;
+
+
+5) interface
+	5.1) interface as a shape
+
+	interface Person {
+		id: number,
+		firstName: string,
+		address?:string
+	}
+
+	function addPerson(p:Person): void {
+		//
+	}
+
+	addPerson({"id": 12, "firstName": "Yanni"}); // valid
+
+	addPerson({"id": 12, "firstName": "Yanni", "address" : "some street"});
+
+	addPerson({firstName": "Yanni"}); // error
+
+	5.2) interface as a contract, realization relationship
+
+	interface Flyable {
+		fly():void;
+	}
+
+	class Bird implements Flyable {
+		// any code
+		fly() : void {
+			// code
+		}
+	}
+
+	class AeroPlane implements Flyable {
+		// any code
+		fly(): void {
+			// code
+		}
+	}
+
+6) class
+
+	class Person {
+		private id:number;
+		private name:string;
+
+		constructor(id, name) {
+			this.id = id;
+			this.name = name;
+		}
+
+
+		getName(): string {
+			return this.name;
+		}
+
+		getId(): number {
+			return this.id;
+		}
+
+	}
+
+	let p1 = new Person(44,"Tim");
+	p1.getName();
+	p1.name; // error
+
+	===
+
+	class Person {
+		constructor(private id:number, public name:string) { }
+		getName(): string {
+			return this.name;
+		}
+
+		getId(): number {
+			return this.id;
+		}
+	}
+
+7) Decorators ==> built using HOF [ function returning a function ]
+
+@Component({
+
+})
+class MyComponent{
+
+}
+
+=============================================================
+
+
+Day 2:
+
+Document Object Model ==> W3C
+
+DOM ==> language independent way of representing HTML / XML in the form of object tree
+used by the engine to manage
+
+Access elements using DOM:
+1) using element ID
+	<div id="someId">..</div>
+
+	let elem = document.getElementById("someId");
+
+2) using  tag Name
+	let elems = document.getElementsByTagName("div")
+
+3) using querySelector	
+
+	let elem = document.querySelector(id/class/tagname/attribute)
+
+	let elems = document.querySelectorAll(id/class/tagname/attribute)
+
+
+	let elems = document.querySelectorAll(".hero-item-detail"); // by class
+
+	let elem = document.querySelector("#myheader"); // by id
+
+	let elems = document.querySelectorAll("div")
+
+	let elems = document.querySelectorAll("input[type='text']")
+
+	let elems = document.querySelectorAll("[width='100px']")
+
+	<img src="" width='100px' />
+
+	<input type="text" />
+
+===========
+
+DOM to create element:
+
+createElement("div"); ==> <div></div>
+
+createElement("table"); ==> <table></table>
+
+==============
+
+DOM events:
+	
+Event Handling: Source generates a event; we need to have listeners listening to event and perform actions based on event
+
+=====================
+
+jQuery == JS Library
+
+$("div") ==> get divs
+
+$("<div>") ==> create div element
+
+=========
+
+AJAX - The XMLHttpRequest Object
+
+jQuery simplifies using XMLHttpRequest Object to make ajax call
+
+============
 
