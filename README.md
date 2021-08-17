@@ -1034,3 +1034,124 @@ jQuery simplifies using XMLHttpRequest Object to make ajax call
 
 ============
 
+$.ajax() vs $.getJSON()
+
+==============================
+
+ setInterval(function test() {
+
+ }, 100);
+
+ setInterval( () => {
+
+ }, 100);
+
+
+
+ $.getJSON("https://jsonplaceholder.typicode.com/users", function callback(data) {})
+
+ $.getJSON("https://jsonplaceholder.typicode.com/users",  (data) => {})
+
+==========================================
+
+
+let btn = $("<button/>");
+btn.addClass(..)
+btn.on("click", () => {});
+
+================================================
+
+Backbone Framework ==> jQuery
+Web application develpment is still using jQuery
+Most of the frameworks are built on top of this
+REACT application ==> can jQuery
+
+==================================================
+
+$("#info").on("click", function() { $(this).fadeOut()});
+
+$("#info").on("click", function() { $(this).fadeOut(1000)});
+
+======================
+
+
+
+$(".btn:first").on("click", function () { $(this).parent().parent().fadeOut(2000)})
+
+$(".btn").first().on("click", function () { $(this).parent().parent().fadeOut(2000)})
+
+=============================================================
+
+
+Node JS
+
+-----------
+
+NodeJs is a platform with V8 engine + built-in modules + libuv libraries 
+
+Why do we need NodeJS?
+* platform for developing client side web applications
+ 1) Environemnt to convert TypeScript/ ES6,7 / Dart / CoffeeScript to ES5
+ 2) Static code analysis ==> Linting
+ 3) We need to bundle our code
+ 	 we develop applications using many files/modules [ 60-100 js files]
+ 	 4 extra network calls for below scripts:
+
+ 	 <script src="a.js"></script>
+ 	 <script src="b.js"></script>
+ 	 <script src="c.js"></script>
+ 	 <script src="d.js"></script>
+
+*  .js ==> add into "bundle.js"
+
+	index.html
+	<script src="bundle.js"></script>
+
+4) Testing ==> Unit Testing / E2E Testing
+
+* to build APIs
+	1) RESTful Web Services => Express / GraphQL ==> Apollo
+	2) Real time streaming of data ==> like OTT Netflix / Amazon Prime [ All are Stream based async code]
+	3) Real time application [ Chatbot / Admin Dashboard]
+
+=======
+NodeJS is bad for CPU intense operations and RDBMS interaction or blocking API
+
+============================
+
+NodeJS comes with many pre-defined modules: fs, http, crypto, url, repl, cluster,...
+
+Module System: IIFE, CommonJS , AMD , ES6
+
+Node JS uses CommonJS module system; each file it treats as module
+
+math.js
+
+module.exports.add = function() { ...}
+module.exports.sub = function() { ...}
+let mul = function() { ...}
+
+
+main.js
+
+let add = require("./math").add;
+let sub = require("./math").sub;
+
+==============================
+
+look into "fs", "http"
+creating nodejs project, npm
+
+Resume @ 3:50
+
+
+
+
+
+
+
+
+
+
+
+
