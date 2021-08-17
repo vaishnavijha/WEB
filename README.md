@@ -1142,7 +1142,79 @@ let sub = require("./math").sub;
 look into "fs", "http"
 creating nodejs project, npm
 
-Resume @ 3:50
+===========
+
+Instead of Web API ==>  Libuv in NodeJS
+
+
+=================================
+
+Events ==> data, end, err
+
+====================================
+
+NodeJS project
+
+NPM / YARN ==> node package manager
+* manage depedencies npmjs.org
+* get dependecises
+* publish dependencies
+* Run scripts
+
+* like PIP or Maven/Gradle
+
+use https://snyk.io/ to check vulnarabilities of modules 
+
+
+========
+1) To initialize a node project
+myapp> npm init --y
+
+npm i -D mocha chai request
+
+ "mocha": "^9.0.3",
+
+ Mocha is a unit testing framework for JS / alternatives are "Jasmine" or "Jest"
+
+ Chai ==> assertion library [ https://www.chaijs.com/]
+
+ ==> testing AAA
+ Assemble Action Assert
+
+ TCER ==> excel sheet
+===
+
+2) github ==> push project minus "node_modules"
+
+Other team members will execute:
+
+$ npm i
+
+  "mocha": "9.0.3", ==> download 9.0.3 version of mocha
+  "mocha": "^9.0.3" ==> download 9.0.3 version or higher if available of mocha
+  "mocha": "~9.0.3" ==> download 9.0.3 version or any sub-versions higher if available of mocha [ 9.1.4 is ok]
+
+==========
+
+// http://localhost:3000/add?x=20&y=15
+// http://localhost:3000/sub?x=20&y=15
+
+/ is pathparameter
+	example==> add or sub
+
+?queryparameter
+	x and y 
+
+===========
+
+Testing  and WebPack and React Intro
+
+===========================
+
+
+
+
+
 
 
 
