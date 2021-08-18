@@ -1525,16 +1525,285 @@ use it:
 import {add, sub} from './math';
 
 
+-------------
+
+webpack.config.js
+babel.config.json
+Person.js
+math.js
+index.js
+
+// output in browser console ==> dist/index.html
+
+npm run dev
+npm run prod
+
+---------------
+const data =[  
+   {  
+      "name":"Baked Salmon",
+      "ingredients":[  
+         {  
+            "name":"Salmon",
+            "amount":1,
+            "measurement":"l lb"
+         },
+         {  
+            "name":"Pine Nuts",
+            "amount":1,
+            "measurement":"cup"
+         },
+         {  
+            "name":"Butter Lettuce",
+            "amount":2,
+            "measurement":"cups"
+         },
+         {  
+            "name":"Yellow Squash",
+            "amount":1,
+            "measurement":"med"
+         },
+         {  
+            "name":"Olive Oil",
+            "amount":0.5,
+            "measurement":"cup"
+         },
+         {  
+            "name":"Garlic",
+            "amount":3,
+            "measurement":"cloves"
+         }
+      ],
+      "steps":[  
+         "Preheat the oven to 350 degrees.",
+         "Spread the olive oil around a glass baking dish.",
+         "Add the salmon, garlic, and pine nuts to the dish.",
+         "Bake for 15 minutes.",
+         "Add the yellow squash and put back in the oven for 30 mins.",
+         "Remove from oven and let cool for 15 minutes. Add the lettuce and serve."
+      ]
+   },
+   {  
+      "name":"Fish Tacos",
+      "ingredients":[  
+         {  
+            "name":"Whitefish",
+            "amount":1,
+            "measurement":"l lb"
+         },
+         {  
+            "name":"Cheese",
+            "amount":1,
+            "measurement":"cup"
+         },
+         {  
+            "name":"Iceberg Lettuce",
+            "amount":2,
+            "measurement":"cups"
+         },
+         {  
+            "name":"Tomatoes",
+            "amount":2,
+            "measurement":"large"
+         },
+         {  
+            "name":"Tortillas",
+            "amount":3,
+            "measurement":"med"
+         }
+      ],
+      "steps":[  
+         "Cook the fish on the grill until hot.",
+         "Place the fish on the 3 tortillas.",
+         "Top them with lettuce, tomatoes, and cheese."
+      ]
+   }
+];
+
+==========
+
+
+Webpack ==> Module bundler
+
+-------
+
+
+webpack.config.js
+
+entry,
+output
+module rules to use different loaders like "babel", "typescript", "sass-loader", "css-loader"
+BABEL ==> ES6+ and REACT
+plugins
+
+===
+Optimization:
+https://webpack.js.org/plugins/split-chunks-plugin/
+
+
+AMD ==> Asynchronous Module Definition
+
+webpack.config.js
+
+ optimization : {
+        splitChunks: {chunks: "all", name :"vendor"}
+ },
+
+
+Create a seperate chunk for files imported from "node_module";
+
+any module above 30kb it starts creating seperate chunk
+
+import React from 'react';
+
+also helps in Lazy loading of modules [ load only if required]
+
+=======================
+
+Core Web Vital ==> FCP
+
+=======================================================================================
+
+
+npm i lodash
+
+index.js
+
+import _ from 'lodash';
+
+console.log(_.join(["Hello", " ", "Webpack" ]));
 
 
 
+npm start
+
+http://localhost:9000
+
+==============================
+
+https://createapp.dev/
+
+set up "typescript"; download-project
+extract the "zip"; within the folder ==> npm install
 
 
+use this to write simple "ts" examples and test it out
+
+Example:
+
+Product.ts
+export default interface Product {
+	id:number,
+	name:string,
+	qty?:number
+}
 
 
+Sample.ts
+
+import Product from './Product';
+
+export default addProduct = function(p:Product) {
+	console.log(p.name, p.id);
+}
 
 
+/src/index.ts
 
+import {addProduct} from './Sample';
+
+addProduct({"id": 1, "name": "iPhone"});
+
+==========================================================
+
+splitChunks: {chunks: "all", name :"vendor"}
+
+define(['jquery'] , function ($) {
+    return function () {};
+});
+
+ 
+=================
+import 'acomponent'; // eagerly loaded
+
+lazy(() => import('./OtherComponent'));
+
+if i use "OtherComponent" then only OtherComponent will be loaded into browser
+
+if(condition){ 
+	use OtherComponent
+}
+
+==================
+
+React Library:
+
+View Library => front-end JavaScript library for building user interfaces or UI components.
+
+
+===========
+website:
+
+Client Side Rendering:
+Templates like jQuery templates, underscore templates, Mustache, Handlebars,...
+
+HTML
+
+HTML + JS ==> DHTML
+
+HTML + JS + CSS ==> DHTML with styling
+
+HTML +JS + CSS + XMLHttpRequest [AJAX] ==> Partial page reload
+
+HTML +JS + CSS + XMLHttpRequest [AJAX] + templates ==> simplfied DOM creation
+
+<div class="card">
+	<div class="card-header">
+			{{customer.firstName}} 			{{customer.lastName}}
+	</div>
+	<div class="card-body">
+			<img src={{customer.avatar}} />
+	</div>
+</div>
+
+=======
+Web application:
+RWD ==> Responsive Web Design ==> Bootstrap, Bulma , Zurb
+
+Single Page Application ==> SPA 
+
+* will have a single "index.html"
+* many templates; templates per view ==> mobile, tv, cart, customer, payments
+* index.html has a placeholder where these templates has to rendered based on user request
+* Application started to have many modules and dependency between modules ==> Dependency Injection
+* Optimize rendering of pages; avoid direct DOM handling
+* Routes
+	Different URIs should display different views:
+
+	http://amazon.com/mobiles
+	http://amazon.com/mobiles/iPhone12
+	http://amazon.com/mobiles/Pixel2
+	http://amazon.com/tvs/smart
+	http://amazon.com/tvs/samusng
+	http://amazon.com/orders/banu@gmail.com/
+
+ Why Routers
+ 	1) SEO
+ 	2) Bookmark ==> send this mark to your friends
+ 	3) History API [ https://developer.mozilla.org/en-US/docs/Web/API/History_API ]
+ 		Navigate between views
+ 	4) Secure your routes	
+ 			below link is accessable after login
+ 			http://amazon.com/orders/banu@gmail.com/
+* Data binding
+
+=================
+
+JS Framework or library
+* Angular [ Google ] ==> Complete solution for web application development ==> MVC pattern [ Model View Controller]
+* React [ Facebook ] ==> just View Library; dependens on 3rd party libaries for anytyhing other than view
+
+============================
 
 
 
