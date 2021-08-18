@@ -1212,6 +1212,318 @@ Testing  and WebPack and React Intro
 ===========================
 
 
+Day 3
+
+-------
+
+function doTask() {
+	loop compute data
+	return data;
+}
+
+let res = doTask(); // pushed on stack; statemetns below this will have to wait until the function returns
+
+-----
+
+
+task().then(
+	function(data) { ... to handle resolve data},
+	function(rejecteddata) { ... to handle rejected data}
+).catch( (err) = > ...)
+
+
+
+task().then(
+	function(data) { ... to handle resolve data}
+).catch( (err) = > ...)
+
+
+task().then(
+	function(data) { ... to handle resolve data}
+);
+
+fetch(url).then( data => console.log(data));
+
+Any code below the statement is free to execute; not blocked
+
+---------
+
+Alternate ==> async and await ==> to avoid nested callbacks of promise
+
+fetch(url)
+	.then(response => response.json())
+	.then(jsondata => task3(jsondata))
+	.then(associatedData = >..)
+
+
+async function task() {
+	try {
+		let res = await fetch(url); // will be blocked until Promise aPI resolves and returns ; res is resolved data
+		let computedData = await task2(res); // will be blocked until task2 resolves 
+		use computedData;
+ 	} catch(ex) {
+ 			// rejected block of code
+	}
+}
+
+task().then(...)
+
+lines below are free to execute
+
+
+-------------------------------------------------------
+
+Node.js ==> platform/environment with v8 engine + libuv helper api [thread pool async helpers] + built-in modules
+
+* common built-in modules of node.js ==> fs, http, url, crypto, events, repl, cluster, ...
+
+* fs module allows handleing "filesystem" in "synchronous way", "callback async mode" and "stream based ==> events"
+
+
+events.EventEmitter
+
+==> event will have a source and many listeners
+* Button is an source for "click" event
+* drop-down is a source for "change" event
+
+* create a event
+
+const LOGEvent = new EventEmitter();
+
+
+* Listener 1:
+
+LOGEvent.on("WARN", (msg) => console.log("WARN:" , msg));
+
+LOGEvent.on("DEBUG", (msg) => console.log("DEBUG:" , msg));
+
+LOGEvent.on("INFO", (msg) => console.log("INFO:" , msg));
+
+
+* Listener 2:
+
+LOGEvent.on("DEBUG", (msg) => alert("DEBUG:" , msg));
+
+
+* Source 1
+
+LOGEvent.emit("DEBUG", "entered into doTask() function");
+
+* Source 2
+
+LOGEvent.emit("WARN", "Your trial period expires in few days!!");
+
+
+=================================
+
+Node.js project structure ==> "node_modules", "package.json" 
+
+ab -c 100 -n 1000 http://localhost:3000/
+
+==================================================
+
+ServerSocket ==> listens to incoming requests ==> 3000
+
+every client request ==> Socket ==> any port between 1024 > 65535 
+
+computed data ==> callbackQueue ==> Event loop takes from callback queue ==> stack
+
+==================================================
+
+Testing
+
+Unit Testing Framework: Jasmine, JEST and Mocha
+Mocha 
+
+Assertion Libraries: Hamcrest, Chai, JEST, Jasmine
+chai
+
+Default: runs all files in "test" folder
+
+mocha file.js
+
+
+function sample(fn) {
+	// code
+  
+	return fn();
+}
+
+=======================
+
+
+
+JS Build tools: Grunt, Gulp, Webpack
+
+
+Grunt is a JavaScript task runner, a tool used to automatically perform frequent tasks such as minification, uglify, compilation, unit testing, and linting
+
+
+webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling,
+
+
+
+minification ==> remove all empty white spaces
+
+function add(x,y) {
+	return x + y;
+}
+
+==> function add(x,y){return x+y;}
+
+Uglify:
+
+function Product(id, firstName) {...}
+
+==> function P(id,f){..}
+
+===============
+
+Webpack:
+
+Webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling
+
+Default bundler comining with Scaffolding code genereators for Angular/ React/ Vue
+
+===========
+
+Webpack Steps:
+
+1) create a folder "webpackexample"
+2) in "webpackexample" folder> npm init --y
+3) npm i webpack webpack-cli -D
+4) npm i webpack-dev-server -D
+
+5) md src
+index.js
+
+"scripts" : {
+	"dev": "webpack --mode development"
+}
+
+npm run dev
+
+[ note: any scripts other than "test" and "start" ==> npm run "nameof script" ;  npm start; npm test;
+npm run dev]
+
+creates "dist/main.js"
+
+
+6) npm i html-webpack-plugin -D
+
+This is a webpack plugin that simplifies creation of HTML files to serve your webpack bundles. This is especially useful for webpack bundles that include a hash in the filename which changes every compilation. 
+
+index.html
+<script src="..."> </script>
+<script src="..."> </script>
+<script src="..."> </script>
+
+
+bundle.js
+vendors.js
+chunk-34342224.js
+
+--
+
+7) create src/index.html
+
+8) customize in "webpack.config.js"
+Usually your projects will need to extend this functionality, for this you can create a webpack.config.js file in the root folder and webpack will automatically use it.
+
+
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+
+module.exports = {
+    plugins: [
+      new HtmlWebpackPlugin({
+          template: path.resolve(__dirname, "src", "index.html")
+      })
+    ]
+  }
+
+
+ npm run prod
+ or
+ npm run dev
+
+ in "dist/index.html" ==> scripts are included by "html-webpack-plugin"
+
+ ===================
+
+9) npm i css-loader style-loader -D
+	
+	css-loader can load css which are included as module
+
+	import "./style.scss";
+
+	require("styles.css")
+
+	css-loader ==> sass-loader
+
+	style.scss
+	$body-color: red;
+	body {
+  	color: $body-color;
+	}
+
+	style-loader ==> Automatically injects styles into the DOM using one <style></style>
+
+
+	html
+
+	<style>
+			body {
+				background-color: 'red'
+			}
+
+	</style>
+
+	<link rel="stylesheet" href="style.css" > leads to extra network call
+
+
+
+REGEX:  https://javascript.info/regular-expressions
+
+ test: /\.css$/, ==> any file ending with "css"
+
+ $ ==> endswith
+ ^ ==> beginsWith
+ 
+
+
+ 10) ES 6 in my code:
+
+ npm i @babel/core babel-loader @babel/preset-env -D
+
+babel.config.json:
+{
+    "presets": ["@babel/preset-env"]
+}
+
+or
+
+{
+  "presets": ["@babel/preset-react"]
+}
+
+
+ES 6 Module System:
+export default class Person {
+
+use it:
+
+import Person from "./Person";
+
+===
+
+export const add = (x, y) => x + y;
+
+export const sub = (x, y) => x - y;
+
+use it: 
+import {add, sub} from './math';
+
 
 
 
