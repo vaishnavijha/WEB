@@ -1,5 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+let Welcome = React.createElement("h1", {style:{'color':'red'}}, "Welcome to React development");
+console.log(Welcome);
 
 function App() {
   return (

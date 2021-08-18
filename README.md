@@ -1801,10 +1801,85 @@ Single Page Application ==> SPA
 
 JS Framework or library
 * Angular [ Google ] ==> Complete solution for web application development ==> MVC pattern [ Model View Controller]
-* React [ Facebook ] ==> just View Library; dependens on 3rd party libaries for anytyhing other than view
+* React [ Facebook ] ==> just View Library; dependens on 3rd party libaries for anything other than view
 
 ============================
 
+React
 
+https://codepen.io/	
 
+HTML:
+<div id="root"></div>
+
+JS ==> Pen Settings:
+1) JavaScript Preprocessor ==> Babel [ Babel includes JSX processing. ]
+
+2) Add external libraries:
+	2.1) react
+	https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js
+	
+	2.2) react-dom
+	https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js
+
+3) Editor Behaviour:
+	Auto Save: off
+	Auto Preview: off
+
+React elements:
+
+let Welcome = React.createElement("h1", {style:{'color':'red'}}, "Welcome to React development");
+
+console.log(Welcome);
+ReactDOM.render(Welcome, document.getElementById("root"))
+
+<div id="root">
+	<h1 style="...">Welcome to React development</h1>
+</div>	
+
+================
+
+* createElement
+* functional components
+* class components
+
+======================
+
+function Welcome() {
+  return <div>
+          <h1>
+             Welcome to React Development 
+          </h1>
+        </div>
+}
+
+console.log(Welcome)
+ReactDOM.render(<Welcome/>, document.getElementById("root"))
+
+React.createElement("div", null, React.createElement("h1", null, "Welcome to React Development"));
+
+Welcome is a functional component: is using JSX ==> JavaScript + XML
+
+Babel ==> knows JSX
+
+====================
+* props
+* parent passes dato to child
+Pass data to Functional components
+
+function Welcome(props) {
+  return <div>
+       		<h1>
+          		{props.msg} at {props.where}
+         </h1>
+    </div>
+}
+console.log(Welcome)
+// console.log(Welcome())
+ReactDOM.render(<Welcome msg="Welcome to React dev" where="Virtual"/>, document.getElementById("root"))
+
+Interpolation:
+	{props.msg} at {props.where}
+
+=======================
 
