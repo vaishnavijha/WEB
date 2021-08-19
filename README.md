@@ -2125,3 +2125,85 @@ export default class CustomerRow extends Component {
 
 <button type="button" onClick={() => this.deleteRow(id)}>Delete</button>
 
+==========================================================================================
+
+Component has props ==> currentProps and prevProps are same
+
+State and Props
+
+props ==> way to pass data from parent to child
+state ==> internal represention of a particular component
+
+==============================================
+
+Testing
+
+-------
+E2E testing ==> Selenium / Cypress
+
+Unit Testing ==> JEST / Jasmine / Mocha
+
+RTL ==> React Testing Library is a Wrapper on top of JEST ==> additional assertion apis to testing components
+
+
+getByXXX() ==> returns null if not found
+queryByXXX() ==> throws exception if not found
+
+findByXXX() ==> Promise API ==> Component gets created evnetually based on side effect ==> API ==> getting creating asyc
+
+document.querySelector(...)
+
+
+<button .. />
+<input type="text" />
+
+getByRoleName("button");
+getByRoleName("text");
+
+
+Welcome to React
+
+getByText(/welcome to react/i); // h1 or div or any other DOM element which has the content
+
+ <input type="text" placeholder="search by name" />
+
+getByPlaceHolderText("search by name");
+
+
+<div data-testid="1"></div>
+
+getByTestId(1);
+
+===========================
+
+npm test
+
+npm test -- --coverage
+
+=================================
+
+styled-components, font-awesome, bootstrap, react-router-dom, react context
+
+================================================
+
+
+$ npx create-react-app phoneapp
+phoneapp> npm i bootstrap styled-components react-router-dom
+
+
+=====================
+
+Task: Recipes application
+1) recipes.json
+2) Web assignments.pdf
+
+======================
+
+
+
+
+ 
+
+
+
+

@@ -60,7 +60,8 @@ export default class CustomerList extends Component {
                 <Filter filterEvent={this.filterCustomers.bind(this)} />
                 {
                     this.state.customers.map(c => <CustomerRow 
-                        delEvent={(id) => this.deleteCustomer(id)} 
+                        // delEvent={(id) => this.deleteCustomer(id)}
+                        delEvent ={this.deleteCustomer.bind(this)} 
                         key={c.id} customer={c} />)
                 }
             </div>
