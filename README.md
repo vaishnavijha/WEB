@@ -2074,6 +2074,8 @@ return <h1>
 				<div>
 				</div>
 
+https://reactjs.org/docs/faq-functions.html
+
 ===========================================
 
 1)  "start": "react-scripts start",
@@ -2098,6 +2100,28 @@ class Welcome extends Component {}
 
 =============
 
-Resume @ 2:20
 
-===============
+export default class CustomerRow extends Component {
+    render() {
+        let {id,firstName, lastName} = this.props.customer;
+        return (
+            <div className="row">
+                    {firstName} &nbsp; {lastName}  &nbsp;
+                    <button type="button" onClick={this.deleteRow.bind(this, id)}>Delete</button>
+            </div>
+        )
+    }
+
+    deleteRow(id) {
+        console.log("Customer row delete", id);
+    }
+}
+
+1)  PREFER:
+
+<button type="button" onClick={this.deleteRow.bind(this, id)}>Delete</button>
+
+2)  AVOID:
+
+<button type="button" onClick={() => this.deleteRow(id)}>Delete</button>
+

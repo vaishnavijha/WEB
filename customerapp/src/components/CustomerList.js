@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import CustomerRow from './CustomerRow';
+import Filter from './Filter';
 
 export default class CustomerList extends Component {
     state = {
@@ -47,13 +48,36 @@ export default class CustomerList extends Component {
         }
     ]
     };
+
+    constructor(props) {
+        super(props);
+        this.state.complete = this.state.customers;
+    }
+
     render() {
         return (
             <div>
+                <Filter filterEvent={this.filterCustomers.bind(this)} />
                 {
-                    this.state.customers.map(c => <CustomerRow key={c.id} customer={c} />)
+                    this.state.customers.map(c => <CustomerRow 
+                        delEvent={(id) => this.deleteCustomer(id)} 
+                        key={c.id} customer={c} />)
                 }
             </div>
         )
+    }
+    deleteCustomer(id) {
+        let custs = this.state.customers.filter(c => c.id !== id);
+        // Asynchronusly
+        this.setState({
+            customers: custs
+        });
+    }
+
+    filterCustomers(txt) {
+        let custs = this.state.complete.filter(c => c.lastName.toUpperCase().indexOf(txt.toUpperCase()) >= 0);
+        this.setState({
+            customers: custs
+        });
     }
 }
