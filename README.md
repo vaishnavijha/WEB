@@ -1883,3 +1883,111 @@ Interpolation:
 
 =======================
 
+
+Day 4
+
+math.js
+
+export  const add = ..
+export  const sub = ..
+export  const multiply = ..
+
+
+other.js
+
+import {add,sub} from './math'; // destructuring
+
+===
+
+export default const add = ...
+
+other.js
+import  add  from './math'; // optimized ==> just load add / imports
+
+import * as math from './math'
+
+	math.add()
+	math.sub()
+
+React
+
+* React.createElement() ==> Virtual DOM ==> JSON object in memory
+
+React Renderer ==> react-dom ==> Reconcillation ==> VDOM ==> DOM; react-native, react-360, ..
+
+
+=================
+
+React 17 ==> Concurrency ==> Fiber [ Thread] 
+https://raphamorim.io/understanding-react-fiber-incremental-rendering-feature/
+
+==========================
+
+
+fs.readFile("a.txt", (err,body) {
+
+});
+
+========================================================
+
+class Product {
+	construtor(id, name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	getName() {
+		return this.name;
+	}
+}
+
+class Mobile extends Product {
+	constructor(id, name, connectivity) {
+		super(id,name);
+		this.connectivity = connectivity;
+	}
+
+	getConnectivity() {
+		return this.connectivity;
+	}
+}
+
+let m = new Mobile(3,"Pixel", "4G");
+
+m.getName();
+m.getConnctivity();
+
+======================================================
+
+
+* React functional components
+
+function Product() {
+	return JSX
+}
+
+* props ==> properties ==> data passed from parent to child
+
+function Product(props) {
+	return <h1>
+				{props.name} costs {props.price}
+		</h1>
+}
+
+<Product name="iPhone" price="89000" /> ==> internally creates React.createElement
+
+ReactDOM.render<Product name="iPhone" price="89000" />, document.getElementById("root"));
+
+============
+
+function Product({name, price}) {
+	return <h1>
+				{name} costs {price}
+		</h1>
+}
+
+================================================
+
+
+
+
