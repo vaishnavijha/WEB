@@ -1989,5 +1989,115 @@ function Product({name, price}) {
 ================================================
 
 
+<div class="card">
+	<p>Hello</p>
+	<h1>df</h1>
+</div>
+
+const products = [{"name":"iPhone", "price": 73442 }, {"name":"Sony", "price" : 98000}];
+
+function ProductRow(props) {
+  return <h3>
+      {props.product.name}, {props.product.price}
+   </h3>
+}
+
+function ProductList(props) {
+  return <div>
+      {
+      props.products.map(p => <ProductRow product={p} />)
+    }
+    </div>
+}
+
+ReactDOM.render(<ProductList products = {products} />, document.getElementById("root"));
 
 
+=========================
+
+npx create-react-app customerapp
+
+npm ==> node package manager ==> installs node modules in "node_modules" folder
+
+npm i -g ==> installs node modules in global folder =="users/AppData/Roaming/npm/"
+
+npx ==> load module in memory and execute
+
+create-react-app ==> creating a scaffolding code for react application
+
+==> dependencies are downloaded, package.json is configured, internally it uses "webpack", default component
+
+If not with "create-react-app"
+* npm init --y
+* npm i all dependecies
+* configure webpack.config.json ==> to use babel and babel-react present
+* ...
+
+=======================
+
+* React.createElement
+* React functional components
+* React class components ==> state and behaviour 
+ ===> Button ==> state => color, caption, size; behaviour ==> click, mousemove, mousehover
+
+// inherit from Component
+class Welcome extends React.Component {
+	// instance variables
+	// methods 
+
+	constructor(props) {
+		super(props)
+	}
+
+	render() {
+			let {msg, where} = this.props;
+			return (
+					<div>
+							<h1> {msg} @ {where}
+					</div>
+			)
+	}
+}
+
+ReactDOM.render(<Welcome msg="Welcome to React dev" where="Virtual"/>, document.getElementById("root"))
+
+
+what is returned from render() gets converted to React.createElement() same as what's returned from a function
+
+
+Note:
+returned JSX from render() or function() should have a root element
+
+below code fails:
+return <h1>
+				</h1>
+				<div>
+				</div>
+
+===========================================
+
+1)  "start": "react-scripts start",
+* BABEL compilation, JSX ==> JS
+* Bundle ==> bundle.js, vendor.js, ..
+starts webpack-dev-server in "watch" mode
+* deploys or loads these files on server
+
+2) npm run eject
+	==> breaks down into webpack.config.js ==> .babelrc
+
+
+3) npm build
+	bundle files are deployed on servers like Apache/Jetty/Tomcat/GlassFish/IIS/..
+
+
+==============================================
+
+In React we use className for css "class"
+
+class Welcome extends Component {}
+
+=============
+
+Resume @ 2:20
+
+===============
