@@ -1,11 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { ProductContext } from './Context'
+import CartList from './CartList';
 
-export default class Cart extends Component {
-    render() {
-        return (
-            <div>
-                <h1>Cart!!!</h1>
+export default function() {
+    let productContext = React.useContext(ProductContext);
+    return <>
+          <div className="container"> 
+            {
+                 productContext.cart.map(p => <CartList product={p} key={p.id} />)
+            }
             </div>
-        )
-    }
+     </>
 }

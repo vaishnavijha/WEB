@@ -2335,8 +2335,55 @@ function App() {
 
 ==========
 
-Resume @ 2:00
+Styled Components:
+
+const Button = styled.button`
+  /* Adapt the colors based on primary prop */
+  background: ${props => props.primary ? "palevioletred" : "white"};
+  color: ${props => props.primary ? "white" : "palevioletred"};
+
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+`;
+
+render(
+  <div>
+    <Button>Normal</Button>
+    <Button primary>Primary</Button>
+  </div>
+);
 
 ==============
 
+Server side Routing
+<a href="/cart">Products</a>
 
+Client Side Routing: ==> Router configuration switch ==> Route
+<Link to="/cart" className="ml-auto">   
+
+
+=========================================================
+
+
+ <Button onClick={() => productContext.increment(id) >+</Button>
+
+ ============
+
+ CartList ==> increment and decrement
+
+ Context.js
+
+ increment =(id) => {
+ 	get product  from cart whose based on id 
+ 	imcrement count
+ 	change total
+ 	update cart state
+ }
+
+ same for decrement
+
+ ===============
+ 
