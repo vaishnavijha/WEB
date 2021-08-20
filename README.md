@@ -2199,11 +2199,144 @@ Task: Recipes application
 
 ======================
 
+<a href="#" onClick={}>
+	<img src="" />
+</a>
+
+==========
 
 
+<form onSubmit={this.handleSubmit}>
+	<input type="text" name="firstName" id="fn"/>
+	<input type="text" name="lastName" id="ln" />
+	<button type="submit">Get Data</button>
+</form>
+
+handleSubmit(evt) {
+	evt.target.elements.firstName.value;
+}
+
+==========================================================
+
+E2E Testing:
+
+npm i cypress -D
+
+
+package.json:
+
+
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "cypress" : "cypress open",
+    "cypress-test": "cypress run"
+  }
 
  
+npm run cypress
+
+===========
+
+.test.js [ Unit testing]
+.spec.js [ E2E] or delete.e2e.js
+
+========================
 
 
+npx create-react-app phoneapp
+
+phoneapp>npm i bootstrap styled-components react-router-dom
+
+ 
+--------------------------------------------
+
+Component Life Cycle
+
+<A>
+	<B/>
+	<C/>
+</A>
+
+B and C are accessed using {this.props.children}
+
+<A>
+	<D/>
+</A>
+
+D is accessed using {this.props.children}
+
+=============
+
+download "share.zip" from github
+
+
+Phoneapp:
+
+1) copy "img" folder into "public"
+
+2) copy "data.js" into src folder
+
+3) overwrite "App.css"
+
+
+Components:
+1) Navbar
+2) ProductList
+3) Product
+4) Cart
+5) CartList
+6) Details
+7) Default
+
+
+
+
+React Fragment:
+
+
+function App() {
+  return (
+    <div>
+
+    </div>   
+  );
+}
+
+or
+
+function App() {
+  return (
+    <React.Fragment>
+
+    </React.Fragment>   
+  );
+}
+
+or
+
+function App() {
+  return (
+    <>
+
+    </>   
+  );
+}
+
+=========================
+
+
+1) "public/index.html" ==> add links to fontawesome and google fonts
+2) Replace "Navbar.js" with the one in "share.zip"
+3) place "Button.js" in "components" folder
+
+
+==========
+
+Resume @ 2:00
+
+==============
 
 
