@@ -1,0 +1,50 @@
+ restaurants = [
+        {
+            "id": 1,
+            "name": "babythai",
+            "description": "Thai food the way you like it!!!.Fresh and grilled",
+            "cuisine": "Thai",
+            "rating": 4,
+            "price": 4
+        },
+        {
+            "id": 2,
+            "name": "curryup",
+            "description": "Indian food with a modern twist. We use all-natural ingredients and the finest spices to delight and tempt your pallate",
+            "cuisine": "Indian",
+            "rating": 4,
+            "price": 3
+        },
+        {
+            "id": 3,
+            "name": "dragon",
+            "description": "Chinese food with a modern twist. We use all-natural ingredients and the finest spices to delight and tempt your pallate",
+            "cuisine": "Chinese",
+            "rating": 3,
+            "price": 4
+        }, {
+            "id": 4,
+            "name": "beijing",
+            "description": "Chinese food with a modern twist. Fresh and Grilled",
+            "cuisine": "Chinese",
+            "rating": 4,
+            "price": 5
+        },
+        {
+            "id": 5,
+            "name": "pizza76",
+            "description": "Famous for Italian-American cuisine menu including pizza and pasta, as well as side dishes and desserts",
+            "cuisine": "Italian",
+            "rating": 4,
+            "price": 3
+        }
+    ];
+
+    originalRestaurants = [];
+    CUISINE_OPTIONS = [
+        { "name": "Indian", "selected": false },
+        { "name": "Chinese", "selected": false },
+        { "name": "Veg", "selected": true },
+        { "name": "Thai", "selected": false },
+        { "name": "Italian", "selected": false }
+    ]

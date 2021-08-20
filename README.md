@@ -2386,4 +2386,101 @@ Client Side Routing: ==> Router configuration switch ==> Route
  same for decrement
 
  ===============
- 
+
+ Recap:
+ 	1) styled-component ==> Button
+ 	2) font-awesome for icons
+ 	3) Bootstrap ==> RWD ==> container, rom, card, card-img-top, col-md col-lg, my-2 , navbar
+
+ 	4) React Router ==> npm i react-router-dom
+ 	BrowserRouter as Router, Link, Switch, Route
+ 	Different URLs different views are renderd in SPA
+
+ 	5) React Context
+ 			5.1) global data for tree of components
+ 			5.2) Provider places data/functions into Context
+ 			5.3) Consumer access them
+ 			5.4) for Functional components new addition 
+ 					let someContext = React.useContext(NameOfContext); // Hook
+
+ 					somContext is the consumer; no need for
+ 					<ProductConsumer>
+ 						 {
+ 						 	value => ...
+ 						 }
+ 					</ProductConsumer>
+ 	===========================================
+
+ 	https://github.com/typicode/json-server
+ 	Get a full fake REST API with zero coding in less than 30 seconds
+
+ 	db.json
+
+ 	{
+  "posts": [
+   					 { "id": 1, "title": "json-server", "author": "typicode" }
+ 			 ],
+  	"comments": [
+    			{ "id": 1, "body": "some comment", "postId": 1 }
+  		],
+ 		 "profile": { "name": "typicode" }
+}
+
+CRUD operations ==> CREATE  READ UPDATE DELETE
+
+http://server:port/posts
+http://server:port/comments
+http://server:port/profile
+
+create "data.json" with endpoints
+
+Fake RESTApi
+
+npx json-server --watch data.json --port 1234
+
+Browser:
+http://localhost:1234/products
+http://localhost:1234/customers
+http://localhost:1234/orders
+http://localhost:1234/products/3
+http://localhost:1234/products?company=apple
+
+
+productapp> npm i axios
+
+====================================================
+
+React Reference:
+
+class App extends React.Component {
+  emailRef = React.createRef(); // reference
+  
+  render() {
+    return (
+      <>
+        <input type="text" ref={this.emailRef} />
+        <button onClick={() => this.doTask()}>Click</button>
+       </>
+    )
+  }
+  
+  doTask() {
+    console.log(this.emailRef.current.value);
+  }
+} 
+
+ReactDOM.render(<App/>, document.getElementById("root"));
+
+===================================================
+
+Re-Render issues
+Suspense and Lazy
+React Hooks [ useContext()]
+Redux
+
+============================
+
+
+
+
+

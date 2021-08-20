@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-// import {storeProducts, detailProduct } from '../data';
-
-import axios from 'axios';
+import {storeProducts, detailProduct } from '../data';
 
 // a global placeholder of data for tree of components
 const ProductContext = React.createContext();
@@ -16,18 +14,12 @@ class ProductProvider extends Component {
     }
     setProducts = () => {
         let prds = [];
-        axios.get("http://localhost:1234/products").then( response => {
-            prds = response.data;
-            this.setState({
-                products: prds
-            });
+        storeProducts.forEach(p => {
+            prds.push({...p});
         });
-        // storeProducts.forEach(p => {
-        //     prds.push({...p});
-        // });
-        // this.setState( {
-        //     products: prds
-        // });
+        this.setState( {
+            products: prds
+        });
     }
 
     getItem = (id) => {
@@ -46,19 +38,9 @@ class ProductProvider extends Component {
             })
     }
 
-    checkout = () => {
-        this.state.cart.map(item => {
-            axios.post("http://localhost:1234/orders", item)
-            .then( () => console.log("order placed!!!"));
-        })
-    }
-
     render() {
         return (
-            <ProductContext.Provider value={{...this.state, 
-            addToCart: this.addToCart,
-            checkout: this.checkout
-            }}>
+            <ProductContext.Provider value={{...this.state, addToCart: this.addToCart}}>
                 {this.props.children}
             </ProductContext.Provider>
         )
