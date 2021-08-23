@@ -2458,14 +2458,14 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <input type="text" ref={this.emailRef} />
+        <input type="text" ref={this.emailRef}  />
         <button onClick={() => this.doTask()}>Click</button>
        </>
     )
   }
   
   doTask() {
-    console.log(this.emailRef.current.value);
+  	  console.log(this.emailRef.current.value);
   }
 } 
 
@@ -2480,7 +2480,475 @@ Redux
 
 ============================
 
+Day 6
 
 
 
+class App extends React.Component {
 
+	state = {
+		firstName: "",
+		lastName : ""
+	}''
+
+  setFirstName(evt)  {
+  	this.setState({
+  		firstName: evt.target.value
+  	})
+  };
+
+
+  setLastName(evt)  {
+  	this.setState({
+  		lastName: evt.target.value
+  	})
+  };
+
+  render() {
+    return (
+      <>
+        FirstName : <input type="text"  onChange={(evt) => this.setFirstName(evt)} /> <br />
+        LastName : <input type="text"  onChange={(evt) => this.setLastName(evt)} />
+
+        <button onClick={() => this.doTask()}>Click</button>
+       </>
+    )
+  }
+  
+  doTask() {
+  	 console.log(this.state)
+  }
+} 
+
+============
+
+forwardRef ==> create a pointer and pass it to Child component; Child would have assigned the pointer to element
+Parent we can access child 
+
+========================
+
+<div class="row">
+	<div class="col-md-4">
+		<Menu />
+	</div>
+	<div class="col-md-8">
+			<Restuarant />
+	</div>
+</div>
+
+==============================
+
+
+state = {
+	"names" : [],
+	"email" : ""
+}
+
+
+this.setState( {
+	"email" : "me@gmail.com"
+});
+
+let localnames = [...this.state.name];
+// make changes to localnames
+this.setState({
+	names: localnames
+});
+
+==============================================
+
+Avoid Re-render of Child
+
+class Child extends React.Component {
+	render() {
+    	console.log("re-render child component.");
+  	return (
+    		<div>
+	      		<p>child component { this.props.name }</p>
+    		</div>
+  	);
+    }
+};
+
+class Parent extends React.Component {
+  state = {
+  count: 0,
+  name : 'Peter'
+ };
+  
+  increment() {
+  	this.setState({
+  		count: this.state.count + 1
+	  });
+ }
+ 
+  render() {
+  	console.log("re-render parent component");
+  	return (
+    	<>
+      		<p>Count: {this.state.count}</p>
+      		<button onClick={() => this.increment()}>Increment</button>
+ 	     	<Child name={this.state.name}/>
+    	</>
+  	);
+  }
+}
+
+ReactDOM.render(<Parent />, document.getElementById('root'));
+
+===============
+
+shouldComponentUpdate(nextProps, nextState)
+
+class Child extends React.Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return JSON.stringify(this.props) !== JSON.stringify(nextProps);
+  }
+	render() {
+    	console.log("re-render child component.");
+  	return (
+    		<div>
+	      		<p>child component { this.props.name }</p>
+    		</div>
+  	);
+    }
+};
+
+class Parent extends React.Component {
+  state = {
+  count: 0,
+  name : 'Peter'
+ };
+  
+  increment() {
+  	this.setState({
+  		count: this.state.count + 1
+	  });
+ }
+ 
+  render() {
+  	console.log("re-render parent component");
+  	return (
+    	<>
+      		<p>Count: {this.state.count}</p>
+      		<button onClick={() => this.increment()}>Increment</button>
+ 	     	<Child name={this.state.name}/>
+    	</>
+  	);
+  }
+}
+
+ReactDOM.render(<Parent />, document.getElementById('root'));
+
+=====================
+
+Functional Components doesn't have Component life-cyle methods
+
+function Child(props) {
+   	console.log("re-render child component.");
+  	return (
+    		<div>
+	      		<p>child component { props.name }</p>
+    		</div>
+  	);
+}
+
+Solution: Memoize the Functional Components
+
+const MemoChild = React.memo(Child); // memoize current props and state; 
+
+// High Order Component
+
+function MemoChild(props) {
+	if nextProps && props also nextState && currentState are same return;
+	return Child(props);
+}
+
+==========================================
+Whenever a state or props changes; the component re-renders and it in turn triggers child re-rendering.
+
+To prevent Child component from re-rendering; re-render only if props passed to child gets changed 
+* In class Component ==> shouldComponentUpdate(nextProps, nextState) ==> boolean
+* In functional components use HOC React.memo(); usage
+const MemoChild = React.memo(Child);
+
+==================
+
+ErrorBoundary
+
+class ErrorBoundary extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			hasError: false,
+			error: null,
+			errorInfo: null
+		}
+	}
+
+	componentDidCatch(error, errorInfo) {
+		this.setState({
+			  	hasError: true,
+			  	error,
+			  	errorInfo
+			})
+	}
+
+	render() {
+		if(this.state.hasError) {
+			return <h1> Something went wrong !!! {this.state.errorInfo} </h1>
+		}
+		return this.props.children;
+	}
+
+}
+
+
+
+function App() {
+	return <ErrorBoundary>
+						<A/>
+						<B/>
+						<C/>
+						<ErrorBoundary>
+								<D/>
+								<E/>
+						</ErrorBoundary>
+		</ErrorBoundary>
+}
+
+=========================================================
+
+React Hooks React 16.6
+Hooks are a new addition in React 16.8. They let you use state and other React features without writing a class
+ 
+1) useContext() ==> use this instead of <ContextConsumer> { value ==> ...} </ContextConsumer>
+
+2) useState() is a hook to introduce the concept of state varaibles in functional components
+
+import React, { useState } from 'react';
+
+function Example() {
+  // Declare a new state variable, which we'll call "count"
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+
+
+=====================
+
+3) useReducer
+		==> if state is complex [ nested objects] / conditionally mutate the state
+
+		let initialState = {count : 0};
+
+		let countReducer = (state, action) => {
+			switch(action.type) {
+				case "INCREMENT" : return {count: state.count + action.payload};
+				case "DECREMENT" : return {count: state.count - 1};
+				default: return state;
+			}
+		}
+
+		function App() {
+			let [state, dispatch] = React.useReducer(countReducer, initialState);
+
+			function handleIncrement() {
+				let action = {"type" : "INCREMENT", payload : 10};
+				dispatch(action);
+			}
+
+			return (
+		    <div>
+		      <p>YCount {state.count} t</p>
+		      <button onClick={handleIncrement}>
+		        Click me
+		      </button>
+		    </div>
+  	);
+
+	}
+
+==============
+
+let initialState = {cart: [], total: 0};
+
+	let cartReducer = (state, action) => {
+			switch(action.type) {
+				case "ADD_TO_CART" : return {cart: state.cart.push(action.payload) };
+				case "REMOVE_FROM_CART" : return {cart: state.cart.filter(p => p.id !== action.id)};
+				case "CLEAR_CART": return { cart: []};
+				default: return state;
+			}
+		}
+
+
+==========
+
+
+4) useEffect
+
+==> to simulate the concept of Component Lifecycle methods in Functional Component
+
+componentDidMount() and componentDidUpdate() ===> make API calls in class component
+
+https://codepen.io/banuprakash/pen/gOgBPBQ
+
+
+function App() {
+	let [count, setCount] = React.useState(0);
+	let [user, setUser] = React.useState("");
+
+	// componentDidUpdate
+	React.useEffect(() => {
+		console.log("called effect 1 ", count)
+	}); 
+
+	// componentDidMount
+	React.useEffect(() => {
+		console.log("called effect 2", count)
+	}, []); 
+
+	// called only on user change
+	React.useEffect(() => {
+		console.log("called effect 3", count)
+	}, [user]); 
+
+	 function handleIncrement() {
+	 	 setCount(count + 1);
+	 }
+
+	return (
+		<>
+			Count {count} <br />
+			<button onClick={handleIncrement}> Click </button> <br />
+		</>
+	)
+}
+ReactDOM.render(<App/>, document.getElementById("app"));
+
+===============
+
+5) React.useCallback ==> memoize function
+
+
+function Title() {
+  console.log('Rendering Title')
+  return (
+    <h2>
+      Example: Title
+    </h2>
+  )
+};
+
+const MemoTitle = React.memo(Title);
+
+function Button({ handleClick, children }) {
+  console.log('Rendering button - ', children)
+  return (
+    <button onClick={handleClick}>
+      {children}
+    </button>
+  )
+}
+
+const MemoButton = React.memo(Button);
+
+function Count({ text, count }) {
+	console.log(`Rendering ${text}`)
+	return <div>{text} - {count}</div>
+}
+
+const MemoCount = React.memo(Count);
+
+function ParentComponent() {
+	const [age, setAge] = React.useState(25)
+	const [salary, setSalary] = React.useState(50000)
+
+	 const incrementAge = () => {
+		setAge(age + 1)
+	};
+
+	const incrementSalary = () => {
+   		setSalary(salary + 1000)
+	}
+  
+	return (
+		<div>
+			<MemoTitle />
+			<MemoCount text="Age" count={age} />
+			<MemoButton handleClick={incrementAge}>Increment Age</MemoButton>
+			<MemoCount text="Salary" count={salary} />
+			<MemoButton handleClick={incrementSalary}>Increment Salary</MemoButton>
+		</div>
+	)
+}
+
+ReactDOM.render(<ParentComponent/>, document.getElementById("root"));
+
+Memoize Button is not preventing from re-rendering
+
+===
+
+
+function Title() {
+  console.log('Rendering Title')
+  return (
+    <h2>
+      Example: Title
+    </h2>
+  )
+};
+
+const MemoTitle = React.memo(Title);
+
+function Button({ handleClick, children }) {
+  console.log('Rendering button - ', children)
+  return (
+    <button onClick={handleClick}>
+      {children}
+    </button>
+  )
+}
+
+const MemoButton = React.memo(Button);
+
+function Count({ text, count }) {
+	console.log(`Rendering ${text}`)
+	return <div>{text} - {count}</div>
+}
+
+const MemoCount = React.memo(Count);
+
+function ParentComponent() {
+	const [age, setAge] = React.useState(25)
+	const [salary, setSalary] = React.useState(50000)
+
+	 const incrementAge = React.useCallback(() => {
+		setAge(age + 1)
+	}, [age]);
+
+	const incrementSalary = React.useCallback(() => {
+   		setSalary(salary + 1000)
+	}, [salary]);
+  
+	return (
+		<div>
+			<MemoTitle />
+			<MemoCount text="Age" count={age} />
+			<MemoButton handleClick={incrementAge}>Increment Age</MemoButton>
+			<MemoCount text="Salary" count={salary} />
+			<MemoButton handleClick={incrementSalary}>Increment Salary</MemoButton>
+		</div>
+	)
+}
+
+ReactDOM.render(<ParentComponent/>, document.getElementById("root"));
